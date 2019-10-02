@@ -4,7 +4,8 @@
   "description": "An api that scrapes a website to get daily weird days!",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "next build"
   },
   "dependencies": {
     "axios": "^0.19.0",

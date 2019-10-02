@@ -14,7 +14,6 @@ const monthNames = ["january", "february", "march", "april", "may", "june","july
 
 
 function fetchData (date,callback) {
-  date.setDate(date.getDate() + 1);
   if (date.getMonth() >= 9 && date.getFullYear() == 2019) {
     var str = `<a href="\/day\/${monthNames[date.getMonth()]}-${date.getDate()}\/">`;
   } else {
@@ -44,7 +43,7 @@ server.prepare()
   .then(()=> {
     app.get("/",handle);
     app.post("/day",(req,res)=> {
-      date = req.body.date ? new Date(req.body.date.toString()) : new Date();
+      var date = req.body.date ? new Date(req.body.date.toString()) : new Date();
       if (req.body.random) {
         fetchData(date,(days)=> {
           res.json({day:days[rnd(0,days.length-1)],date:date});
