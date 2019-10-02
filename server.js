@@ -2,8 +2,10 @@ const express = require("express");
 const axios = require("axios");
 const next = require("next");
 const body = require("body-parser");
+const cors = require("cors");
 const app = express();
 app.use(body.json());
+app.use(cors())
 const dev = process.env.NODE_ENV !== 'production';
 const server = next({ dev });
 const handle = server.getRequestHandler();
@@ -12,10 +14,16 @@ const monthNames = ["january", "february", "march", "april", "may", "june","july
 
 
 function fetchData (date,callback) {
-  var str = `<a href="\/day\/${monthNames[date.getMonth()]}-${date.getDate()}\/">`;
+  date.setDate(date.getDate() + 1);
+  if (date.getMonth() >= 9 && date.getFullYear() == 2019) {
+    var str = `<a href="\/day\/${monthNames[date.getMonth()]}-${date.getDate()}\/">`;
+  } else {
+    var str = `<a href="\/day\/${monthNames[date.getMonth()]}-${date.getDate()}-${date.getFullYear()}\/">`;
+  }
   var url = "http://www.holidayscalendar.com/categories/weird/";
   axios.get(url)
     .then((val)=> {
+      console.log(str)
       var tags = val.data.match(new RegExp(str+'(.*?)Day<\/td>',"g"));   
       if (tags) {
         tags = tags.join(":");

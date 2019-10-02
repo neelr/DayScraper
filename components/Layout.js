@@ -9,6 +9,7 @@ class Layout extends React.Component {
                 <Head>
                     <title>DayScraper</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                 </Head>
                 <div style={{ paddingBottom: "6rem" }}>
                     <Header />
