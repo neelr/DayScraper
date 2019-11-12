@@ -41,7 +41,7 @@ function rnd(min, max) {
 }
 server.prepare()
   .then(()=> {
-    app.get("/",handle);
+    app.get("/*",handle);
     app.post("/day",(req,res)=> {
       var date = req.body.date ? new Date(req.body.date.toString()) : new Date();
       if (req.body.random) {
